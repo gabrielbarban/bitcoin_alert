@@ -40,19 +40,16 @@ class api_prices_service{
 
 	public function salva_btc($valor_atual){
 
-		$arquivo = fopen ('../data/btc.txt', 'r');
-		while(!feof($arquivo)){
-			$valor_txt = fgets($arquivo, 1024);
-		}
-		fclose($arquivo);
-
-		if($valor_atual === $valor_txt){
-			echo "o valor nao mudou";exit;
+		$fh = fopen("../data/btc.txt", "rb");
+		$valor_txt = fread($fh, 4096);
+		fclose($fh);
+		if($valor_txt === $valor_atual){
+			echo "o valor nao mudou";
 		} else{
-			$this->valida_envia_valor($valor_atual, $valor_txt);
 			$myfile = fopen("../data/btc.txt", "w+");
-			fwrite($myfile, $valor_atual);
-			fclose($myfile);
+                        fwrite($myfile, $valor_atual);
+                        fclose($myfile);
+			$this->valida_envia_valor($valor_atual, $valor_txt);
 		}
 	}
 
