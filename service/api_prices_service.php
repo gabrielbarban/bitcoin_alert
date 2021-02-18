@@ -17,8 +17,11 @@ class api_prices_service{
 		$email = new \SendGrid\Mail\Mail(); 
 
 		$email->setFrom("dev@avatardasaude.com.br", "Gabriel");
-		$email->setSubject("Alerta bitcoin");
+		$email->setSubject("Alerta Bitcoin | BARBAN SOFTWARES");
 		$email->addTo("barbangabriel@gmail.com", "Gabriel Barban");
+		$email->addTo("clr123rocha@yahoo.com.br", "Claudio Lourenco");
+		$email->addTo("claudiolr.sp@uol.com.br", "Claudio Lourenco");
+		$email->addTo("lanamelo2015@gmail.com", "Lana Melo");
 		$email->addContent("text/plain", "conteudo");
 		$email->addContent("text/html", $html);
 		$key      = "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";
@@ -79,13 +82,13 @@ class api_prices_service{
 			$porcentagem = (100 * $diferenca) / $valor_txt;
 			$porcentagem = number_format($porcentagem, 6);
 
-			if($porcentagem > 5){
+			if($porcentagem > 2){
 				if($this->envia_email($valor_atual, $valor_txt, $porcentagem, $diferenca, "queda")){
 					echo "Email enviado | COD 1";
 				}
 			}
 
-			else if($porcentagem < 5){
+			else if($porcentagem < 2){
 				//vida q segue mlk
 				echo "uma queda baixa, de {$porcentagem}%";
 			}
@@ -98,13 +101,13 @@ class api_prices_service{
 			$porcentagem = (100 * $diferenca) / $valor_atual;
 			$porcentagem = number_format($porcentagem, 6);
 
-			if($porcentagem > 5){
+			if($porcentagem > 2){
 				if($this->envia_email($valor_atual, $valor_txt, $porcentagem, $diferenca, "subida")){
 					echo "Email enviado | COD 2";
 				}
 			}
 
-			else if($porcentagem < 5){
+			else if($porcentagem < 2){
 				//vida q segue mlk
 				echo "uma subida tímida, de {$porcentagem}%";
 			}
